@@ -11,9 +11,14 @@ body {
 #players {
   margin: auto;
   overflow: hidden;
-  width: 500px;
+  width: 450px;
 }
-/* 
+
+#players input[type=text], label {
+  float: left;
+  width: 100px;
+}
+
 #players input[type=text] {
   float: left;
   width: 250px;
@@ -21,7 +26,7 @@ body {
 
 #players button {
   float: right;
-} */
+}
 
 #game {
   margin: 15px 0px 0px 0px ;
@@ -67,14 +72,6 @@ body {
     transform: translateY(0);
   }
 }
-
-/* .piece.p1 {
-  background-color: lightcoral;
-}
-
-.piece.p2 {
-  background-color: grey;
-} */
 
 /* column-top is table row of clickable areas for each column */
 
