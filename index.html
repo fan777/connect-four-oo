@@ -1,22 +1,26 @@
 <!doctype html>
-<head>
-  <title>Connect 4</title>
-  <link href="connect4.css" rel="stylesheet">
-</head>
-<body>
-<!-- <div id="players">
-  <b><span id="turn"></span></b>
-  <form>
-    <input type="text" placeholder="Player 1 color">
-    <input type="text" placeholder="Player 2 color">
-    <input type="button" value="Start Game!">
-  </form>
-</div> -->
+  <head>
+    <title>Connect 4</title>
+    <link href="connect4.css" rel="stylesheet">
+  </head>
+  <body>
+    <h1 class="header">Connect Four</h1>
 
-<div id="game">
-  <table id="board"></table>
-</div>
+    <div id="players">
+      <input id="player-1-color" type="text" placeholder="Player 1 color [blank for default]">
+      <input id="player-2-color" type="text" placeholder="Player 2 color [blank for default]">
+      <button id="start-game">Start Game!</button>
+      <!-- <p><span id="player-turn">Whose turn?</span></p>  -->
+    </div>
 
-<script src="connect4.js"></script>
-</body>
+    <div id="game">
+      <table id="board"></table>
+    </div>
+
+    <div id="rules">
+      <p><b>Game rules:  Player 1 and 2 alternate turns. On each turn, a piece is dropped down a column until a player gets four-in-a-row (horiz, vert, or diag) or until board fills (tie).</b></p>
+    </div> 
+
+    <script src="connect4.js"></script>
+  </body>
 </html>

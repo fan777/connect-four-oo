@@ -1,4 +1,45 @@
+body {
+  font-family:Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: darkslategrey;
+}
+
+
+
+/* sections */
+
+#players {
+  margin: auto;
+  overflow: hidden;
+  width: 500px;
+}
+/* 
+#players input[type=text] {
+  float: left;
+  width: 250px;
+}
+
+#players button {
+  float: right;
+} */
+
+#game {
+  margin: 15px 0px 0px 0px ;
+}
+
+#rules {
+  margin: auto;
+  overflow: hidden;
+  width: 400px;
+  font-size: 15px;
+}
+
 /* game board table */
+
+#board {
+  margin: auto;
+  overflow: hidden;
+}
 
 #board td {
   width: 50px;
@@ -13,15 +54,27 @@
   width: 80%;
   height: 80%;
   border-radius: 50%;
+  position: relative;
+  animation-name: dropPiece;
+  animation-duration: 1s;
 }
 
-.piece.p1 {
-  background-color: red;
+@keyframes dropPiece {
+  from { 
+    transform: translateY(-400px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* .piece.p1 {
+  background-color: lightcoral;
 }
 
 .piece.p2 {
-  background-color: blue;
-}
+  background-color: grey;
+} */
 
 /* column-top is table row of clickable areas for each column */
 
