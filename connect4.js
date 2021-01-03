@@ -6,12 +6,13 @@
  */
 class Game {
   
-  constructor(player1, player2, height = 6, width = 7) {
-    this.players = [player1, player2];
+  constructor(players, height, width) {
+    this.players = players;
     this.height = height;
     this.width = width;
-    this.currPlayer = player1; // active player: 1 or 2
+    this.currPlayer = players[0]; // active player
 
+    this.setCurrentTurnHTML();
     this.makeBoard();
     this.makeHtmlBoard();
   }
@@ -75,13 +76,18 @@ class Game {
   endGame(msg) {
     alert(msg);
     document.getElementById('column-top').removeEventListener('click', this.handleBindClick);
+    document.getElementById('current-turn').style.backgroundColor = 'white';
+    document.getElementById('current-turn').innerText = "";
   }
 
   /** handleClick: handle click of column top to play piece */
   handleClick(evt) {
     // get x from ID of clicked cell
     const x = +evt.target.id;
-  
+    this.gameLogic(x);
+  }
+
+  gameLogic(x) {
     // get next spot in column (if none, ignore click)
     const y = this.findSpotForCol(x);
     if (y === null) {
@@ -94,7 +100,7 @@ class Game {
     
     // check for win
     if (this.checkForWin()) {
-      return this.endGame(`The ${this.currPlayer.color} player won!`);
+      return this.endGame(`Player ${this.currPlayer.id} won!`);
     }
     
     // check for tie
@@ -103,7 +109,25 @@ class Game {
     }
     
     // switch players
-    this.currPlayer = this.currPlayer === this.players[0] ? this.players[1] : this.players[0];
+    this.currPlayer = this.switchPlayer(this.players.findIndex((player) => player === this.currPlayer));
+    this.setCurrentTurnHTML();
+    if (this.currPlayer.bot === true) {
+      this.botMove();
+    }
+  }
+
+  switchPlayer(currIdx) {
+    return this.players[currIdx + 1 < this.players.length ? currIdx + 1 : 0]; 
+  }
+
+  botMove() {
+    this.gameLogic(Math.floor(Math.random() * this.width));
+  }
+
+  setCurrentTurnHTML() {
+    document.getElementById('current-turn').style.backgroundColor = this.currPlayer.color;
+    document.getElementById('current-turn').style.color='white';
+    document.getElementById('current-turn').innerHTML = 'Current Player<br />' + this.currPlayer.id;
   }
   
   checkForWin() {
@@ -137,13 +161,36 @@ class Game {
 }
 
 class Player {
-  constructor(color) {
+  constructor(id, color) {
+    this.id = id;
     this.color = color;
   }
 }
 
+class ComputerPlayer extends Player {
+  constructor(id, color) {
+    super(id, color);
+    this.bot = true;
+  }
+}
+
+// document.getElementById('add-players').addEventListener('click', (evt) => {
+
+// })
+
 document.getElementById('start-game').addEventListener('click', (evt) => {
-  const player1 = new Player(document.getElementById('player-1-color').value ? document.getElementById('player-1-color').value : 'lightcoral');
-  const player2 = new Player(document.getElementById('player-2-color').value ? document.getElementById('player-2-color').value : 'grey');
-  new Game(player1, player2);
+  const players = [];
+  players.push(new Player('1', document.getElementById('player1').value));
+  players.push(document.getElementById('player2-bot').checked ? new ComputerPlayer('2', document.getElementById('player2').value) : new Player('2', document.getElementById('player2').value));
+
+  const height = document.getElementById('board-height').value ? parseInt(document.getElementById('board-height').value) : 6;
+  const width = document.getElementById('board-width').value ? parseInt(document.getElementById('board-width').value) : 7;
+  
+  if ((players.reduce((set, player) => set.add(player.color), new Set())).size !== players.length) {
+    alert('Player colors must be unique!');
+  } else {
+    const game = new Game(players, height, width);
+    // game.makeBoard();
+    // game.makeHtmlBoard();
+  }
 })

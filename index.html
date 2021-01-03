@@ -4,24 +4,64 @@
     <link href="connect4.css" rel="stylesheet">
   </head>
   <body>
-    <h1 class="header">Connect Four</h1>
+    <section id="header">Connect Four
+      <span class="subtext">[?]<span class="tooltip">Players alternate turns. On each turn, a piece is dropped down a column until a player gets four-in-a-row (horiz, vert, or diag) or until board fills (tie).</span></span>
+    </section>
 
-    <div id="players">
-      <label for="player-1-color">Player 1</label>
-      <input id="player-1-color" type="text" placeholder="Player 1 color [leave blank for default]"> <br />
-      <label for="player-2-color">Player 2</label>
-      <input id="player-2-color" type="text" placeholder="Player 2 color [leave blank for default]">
-      <button id="start-game">Start Game!</button>
-      <!-- <p><span id="player-turn">Whose turn?</span></p>  -->
-    </div>
+    <section id="game-options">
+    <!-- <div id="player-turn">
+      <span id="player-turn">Whose turn?</span>
+    </div> -->
+      <div id="player-options">
+        <div class="options-header">Player Color</div>
+        <div class="player">
+          <label for="player1">1</label>
+          <input id="player1" type="color">
+        </div>
+        <div class="player">
+          <label for="player2">2</label>
+        <input id="player2" type="color">
+        <input id="player2-bot" type="checkbox">
+        <label for=player2-bot><span class="subtext">[bot?]</span></label>
+        </div>
+        <!-- <div class="player">
+          <span class="subtext">[<a href="#" id="add-players">Add more players</a>]</span>
+        </div> -->
+      </div>
+      <div id="board-options">
+        <div class="options-header">Board Size</div>
+        <div class="size-option">
+          <input type="text" id="board-height" name="board-height" placeholder="6">
+          <label for="board-height">Height</label>
+        </div>
+        <div class="size-option">
+          <input type="text" id="board-width" name="board-height" placeholder="7">
+          <label for="board-width">Width</label>
+        </div>
+      </div>      
+      <div id="board-options">
+        <div class="options-header">
+          <button id="start-game">Start Game!</button>
+        </div>
+        <div id="current-turn">
+          <!-- Current Turn -->
+        </div>
+      </div>
+      <!-- <div id="additional-players">
+        <div class="player">
+          <label for="player1">1</label>
+          <input id="player1" type="color">
+        </div>
+        <div class="player">
+          <label for="player1">1</label>
+          <input id="player1" type="color">
+        </div>
+      </div> -->
+    </section>
 
-    <div id="game">
+    <section id="game">
       <table id="board"></table>
-    </div>
-
-    <div id="rules">
-      <p><b>Game rules:  Player 1 and 2 alternate turns. On each turn, a piece is dropped down a column until a player gets four-in-a-row (horiz, vert, or diag) or until board fills (tie).</b></p>
-    </div> 
+    </section>
 
     <script src="connect4.js"></script>
   </body>
